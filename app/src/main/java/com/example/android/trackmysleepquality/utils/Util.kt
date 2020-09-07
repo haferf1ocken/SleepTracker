@@ -41,8 +41,8 @@ fun convertNumericQualityToString(quality: Int, resources: Resources): String {
  * HH:mm - Hours and minutes in 24hr format
  */
 @SuppressLint("SimpleDateFormat")
-fun convertLongToDateString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
+fun convertLongToDateString(systemTime: Long, resources: Resources): String {
+    return SimpleDateFormat("EEEE MMM-dd-yyyy' ${resources.getString(R.string.time)}: 'HH:mm")
             .format(systemTime).toString()
 }
 
@@ -66,19 +66,22 @@ fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
         nights.forEach {
             append("<br>")
             append(resources.getString(R.string.start_time))
-            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
+            append("\t${convertLongToDateString(it.startTimeMilli, resources)}<br>")
             if (it.endTimeMilli != it.startTimeMilli) {
                 append(resources.getString(R.string.end_time))
-                append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
+                append("\t${convertLongToDateString(it.endTimeMilli, resources)}<br>")
                 append(resources.getString(R.string.quality))
                 append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
                 append(resources.getString(R.string.hours_slept))
                 // Hours
-                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
+                val hours = (it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60) % 60
+                append("\t ${if (hours.toString().length < 2) "0$hours" else hours}:")
                 // Minutes
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
+                val minutes = (it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60) % 60
+                append("${if (minutes.toString().length < 2) "0$minutes" else minutes}:")
                 // Seconds
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
+                val seconds = (it.endTimeMilli.minus(it.startTimeMilli) / 1000) % 60
+                append("${if (seconds.toString().length < 2) "0$seconds" else seconds}<br><br>")
             }
         }
     }

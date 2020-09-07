@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App title and fragment titles -->
+    <string name="app_name">Мониторинг качества сна</string>
+    <string name="sleep_tracker_fragment">SleepTrackerFragment</string>
+    <string name="sleep_quality_fragment">SleepQualityFragment</string>
+
+    <!-- Button labels -->
+    <string name="start">Начать</string>
+    <string name="stop">Остановить</string>
+    <string name="clear">Очистить</string>
+
+    <!-- contentDescription strings for quality icons -->
+    <string name="quality_0">Качество сна 0</string>
+    <string name="quality_1">Качество сна 1</string>
+    <string name="quality_2">Качество сна 2</string>
+    <string name="quality_3">Качество сна 3</string>
+    <string name="quality_4">Качество сна 4</string>
+    <string name="quality_5">Качество сна 5</string>
+
+    <!-- Output to TextView styled with a little HTML -->
+    <string name="title"><![CDATA[<h3>ВАШИ ДАННЫЕ О СНЕ</h3>]]></string>
+    <string name="start_time"><![CDATA[<b>Начало сна:</b>]]></string>
+    <string name="end_time"><![CDATA[<b>Пробуждение:</b>]]></string>
+    <string name="quality"><![CDATA[<b>Качество сна:</b>]]></string>
+    <string name="hours_slept"><![CDATA[<b>Часы:Минуты:Секунды</b>]]></string>
+    <string name="time">Время</string>
+
+    <!-- Sleep quality strings -->
+    <string name="how_was_hour_sleep">Как вам спалось?</string>
+    <string name="zero_very_bad">Очень плохо</string>
+    <string name="one_poor">Плохо</string>
+    <string name="two_soso">Так себе</string>
+    <string name="three_ok">Хорошо</string>
+    <string name="four_pretty_good">Довольно хорошо</string>
+    <string name="five_excellent">Замечательно!</string>
+
+    <!-- Toast to play after Clear button has been pressed -->
+    <string name="cleared_message">Все ваши данные очищены.</string>
+
+</resources>
