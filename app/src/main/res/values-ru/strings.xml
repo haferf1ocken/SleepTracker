@@ -38,5 +38,9 @@
 
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">Все ваши данные очищены.</string>
-
+    <string name="header_text">Результаты сна</string>
+    <string name="close">Закрыть</string>
+    <string name="minutes_length">%d минут в %s</string>
+    <string name="hours_length">%d часов в %s</string>
+    <string name="seconds_length">%d секунд в %s</string>
 </resources>
