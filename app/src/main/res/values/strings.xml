@@ -40,7 +40,16 @@
     <string name="cleared_message">All your data is gone forever.</string>
     <string name="header_text">Sleep Results</string>
     <string name="close">Close</string>
-    <string name="minutes_length">%d minutes on %s</string>
-    <string name="hours_length">%d hours on %s</string>
-    <string name="seconds_length">%d seconds on %s</string>
+    <plurals name="minutes_length">
+        <item quantity="one">%s\nSleep time: %d minute</item>
+        <item quantity="other">%s\nSleep time: %d minutes</item>
+    </plurals>
+    <plurals name="hours_length">
+        <item quantity="one">%s\nSleep time: %d hour</item>
+        <item quantity="other">%s\nSleep time: %d hours</item>
+    </plurals>
+    <plurals name="seconds_length">
+        <item quantity="one">%s\nSleep time: %d second</item>
+        <item quantity="other">%s\nSleep time: %d seconds</item>
+    </plurals>
 </resources>

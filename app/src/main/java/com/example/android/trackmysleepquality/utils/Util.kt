@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -19,19 +20,19 @@ private val ONE_HOUR_MILLIS = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
 
 fun convertDurationToFormatted(startTimeMilli: Long, endTimeMilli: Long, res: Resources): String {
     val durationMilli = endTimeMilli - startTimeMilli
-    val weekdayString = SimpleDateFormat("EEEE", Locale.getDefault()).format(startTimeMilli)
+    val weekdayString = SimpleDateFormat("EEEE dd-MMMM-yyyy", Locale.getDefault()).format(startTimeMilli)
     return when {
         durationMilli < ONE_MINUTE_MILLIS -> {
             val seconds = TimeUnit.SECONDS.convert(durationMilli, TimeUnit.MILLISECONDS)
-            res.getString(R.string.seconds_length, seconds, weekdayString)
+            res.getQuantityString(R.plurals.seconds_length, seconds.toInt(), seconds.toInt(), weekdayString)
         }
         durationMilli < ONE_HOUR_MILLIS -> {
             val minutes = TimeUnit.MINUTES.convert(durationMilli, TimeUnit.MILLISECONDS)
-            res.getString(R.string.minutes_length, minutes, weekdayString)
+            res.getQuantityString(R.plurals.minutes_length, minutes.toInt(), minutes.toInt(), weekdayString)
         }
         else -> {
             val hours = TimeUnit.HOURS.convert(durationMilli, TimeUnit.MILLISECONDS)
-            res.getString(R.string.hours_length, hours, weekdayString)
+            res.getQuantityString(R.plurals.hours_length, hours.toInt(), hours.toInt(), weekdayString)
         }
     }
 }
@@ -85,37 +86,4 @@ fun convertLongToDateString(systemTime: Long, resources: Resources): String {
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
-fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
-    val sb = StringBuilder()
-    sb.apply {
-        append(resources.getString(R.string.title))
-        nights.forEach {
-            append("<br>")
-            append(resources.getString(R.string.start_time))
-            append("\t${convertLongToDateString(it.startTimeMilli, resources)}<br>")
-            if (it.endTimeMilli != it.startTimeMilli) {
-                append(resources.getString(R.string.end_time))
-                append("\t${convertLongToDateString(it.endTimeMilli, resources)}<br>")
-                append(resources.getString(R.string.quality))
-                append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
-                append(resources.getString(R.string.hours_slept))
-                // Hours
-                val hours = (it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60) % 60
-                append("\t ${if (hours.toString().length < 2) "0$hours" else hours}:")
-                // Minutes
-                val minutes = (it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60) % 60
-                append("${if (minutes.toString().length < 2) "0$minutes" else minutes}:")
-                // Seconds
-                val seconds = (it.endTimeMilli.minus(it.startTimeMilli) / 1000) % 60
-                append("${if (seconds.toString().length < 2) "0$seconds" else seconds}<br><br>")
-            }
-        }
-    }
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-}
 
-class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)

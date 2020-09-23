@@ -29,18 +29,30 @@
 
     <!-- Sleep quality strings -->
     <string name="how_was_hour_sleep">Как вам спалось?</string>
-    <string name="zero_very_bad">Очень плохо</string>
+    <string name="zero_very_bad">Очень\nплохо</string>
     <string name="one_poor">Плохо</string>
     <string name="two_soso">Так себе</string>
     <string name="three_ok">Хорошо</string>
-    <string name="four_pretty_good">Довольно хорошо</string>
+    <string name="four_pretty_good">Довольно\nхорошо</string>
     <string name="five_excellent">Замечательно!</string>
 
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">Все ваши данные очищены.</string>
     <string name="header_text">Результаты сна</string>
     <string name="close">Закрыть</string>
-    <string name="minutes_length">%d минут в %s</string>
-    <string name="hours_length">%d часов в %s</string>
-    <string name="seconds_length">%d секунд в %s</string>
+    <plurals name="minutes_length">
+        <item quantity="one">Время сна: %d минута\n\n%s</item>
+        <item quantity="few">Время сна: %d минуты\n\n%s</item>
+        <item quantity="many">Время сна: %d минут\n\n%s</item>
+    </plurals>
+    <plurals name="hours_length">
+        <item quantity="one">Время сна: %d час\n%s</item>
+        <item quantity="few">Время сна: %d часа\n%s</item>
+        <item quantity="many">Время сна: %d часов\n%s</item>
+    </plurals>
+    <plurals name="seconds_length">
+        <item quantity="one">Время сна: %d секунда\nДата: %s</item>
+        <item quantity="few">Время сна: %d секунды\nДата: %s</item>
+        <item quantity="many">Время сна: %d секунд\nДата: %s</item>
+    </plurals>
 </resources>
